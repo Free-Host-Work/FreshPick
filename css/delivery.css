@@ -3,7 +3,8 @@
   background: linear-gradient(to bottom right, #e6ffe6, #ffffff);
   border-top: 2px solid var(--accent-color);
   border-radius: 1rem;
-  overflow-x: hidden; /* 🔧 Fix overflow on small screens */
+  overflow-x: hidden;
+  /* 🔧 Fix overflow on small screens */
 }
 
 .delivery-section .section-title {

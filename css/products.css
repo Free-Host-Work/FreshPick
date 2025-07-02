@@ -8,14 +8,16 @@
   backdrop-filter: blur(5px);
   background-attachment: fixed !important;
 }
-.product-bg-overlay{
+
+.product-bg-overlay {
   backdrop-filter: blur(15px);
-  
+
 }
+
 .product-section .section-title {
   text-align: center;
   font-size: 2.5rem;
-  color: rgb(154, 240, 25)!important;
+  color: rgb(154, 240, 25) !important;
   margin-bottom: 0.5rem;
 }
 
@@ -29,7 +31,8 @@
 /* ✅ CATEGORY CONTAINER GRID */
 .product-categories {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 per row for large desktop */
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 per row for large desktop */
   gap: 2rem;
   margin-top: 20px;
 }
@@ -58,7 +61,8 @@
 /* ✅ INSIDE EACH CATEGORY: 2 Cards per Row */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Always 2 per row */
+  grid-template-columns: repeat(2, 1fr);
+  /* Always 2 per row */
   gap: 1rem;
   margin-top: 20px;
 }
@@ -115,7 +119,8 @@
   }
 
   .product-grid {
-    grid-template-columns: repeat(2, 1fr); /* Still 2 cards per row */
+    grid-template-columns: repeat(2, 1fr);
+    /* Still 2 cards per row */
   }
 
   .product-card img {

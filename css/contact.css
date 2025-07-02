@@ -3,16 +3,18 @@
   background: linear-gradient(to bottom right, #f0fff4, #ffffff);
   border-top: 2px solid var(--accent-color);
   overflow-x: hidden;
-  
+
 }
 
 .section-title, .section-subtitle {
   text-align: center;
 }
-.order-buttons a{
-  text-decoration: none!important;
+
+.order-buttons a {
+  text-decoration: none !important;
   color: inherit;
 }
+
 .section-title {
   font-size: 2.2rem;
   color: var(--primary-color);
@@ -90,10 +92,11 @@
     padding: 3rem 1rem;
   }
 
-  a{
+  a {
     text-decoration: none;
     color: inherit;
   }
+
   .contact-grid {
     flex-direction: column;
     align-items: stretch;

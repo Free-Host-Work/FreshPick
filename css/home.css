@@ -8,17 +8,18 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  position:sticky;
+  position: sticky;
   background-attachment: fixed !important;
   background-size: cover;
   background-position: center;
 }
-.btn{
-    margin-top: 30px;
+
+.btn {
+  margin-top: 30px;
 }
 
 .hero-overlay {
-  background: linear-gradient(to right, rgba(235, 237, 235, 0.767) 0%, rgba(252, 247, 247, 0.607) 30%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(to right, rgba(235, 237, 235, 0.767) 0%, rgba(252, 247, 247, 0.607) 30%, rgba(0, 0, 0, 0) 100%);
   backdrop-filter: blur(5px);
   padding: 6rem 2rem 3rem;
   width: 100%;
@@ -28,18 +29,27 @@
 .hero-text {
   max-width: 700px;
   animation: fadeInUp 1s ease-in-out;
-  
+
 }
-.hero-text h1{
-    font-size: 6rem;
+
+.hero-text h1 {
+  font-size: 6rem;
 }
-.hero-text p{
-    font-size: 2rem;
+
+.hero-text p {
+  font-size: 2rem;
 }
 
 @keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(40px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .veggie-scroll-gallery {
@@ -64,7 +74,7 @@
   flex-direction: column;
   align-items: center;
   min-width: 100px;
-  
+
 }
 
 .veg-item img {
@@ -72,7 +82,7 @@
   width: auto;
   border-radius: 10%;
   transition: transform 0.4s ease, filter 0.3s ease;
-  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.15));
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
 }
 
 .veg-item:hover img {
@@ -89,39 +99,55 @@
 }
 
 @keyframes scrollGallery {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes bgFade {
   0%, 100% {
     background-image: url('../images/vegstack3.png');
   }
+
   33% {
     background-image: url('../images/vegstack7.png');
   }
+
   66% {
     background-image: url('../images/farm5.png');
   }
 }
 
 @keyframes bounceIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .hero-section {
-  position: relative;
-  overflow: hidden;
-  height: 90%;
-}
-  .services-bg-overlay{
+    position: relative;
+    overflow: hidden;
+    height: 90%;
+  }
+
+  .services-bg-overlay {
     background-attachment: fixed !important;
     background-size: cover;
     background-position: center;
   }
+
   .hero-text h1 {
     font-size: 2.5rem;
     color: green;
@@ -129,6 +155,7 @@
     text-align: center;
     margin-top: -40px;
   }
+
   .hero-text p {
     font-size: 1.5rem;
   }
