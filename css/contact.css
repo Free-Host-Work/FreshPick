@@ -1,0 +1,129 @@
+.contact-section {
+  padding: 4rem 1rem;
+  background: linear-gradient(to bottom right, #f0fff4, #ffffff);
+  border-top: 2px solid var(--accent-color);
+  overflow-x: hidden;
+  
+}
+
+.section-title, .section-subtitle {
+  text-align: center;
+}
+.order-buttons a{
+  text-decoration: none!important;
+  color: inherit;
+}
+.section-title {
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  color: #333;
+}
+
+.contact-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-items: stretch;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.contact-card {
+  flex: 1 1 300px;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+  max-width: 500px;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card h3 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.order-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem 0;
+  justify-items: stretch;
+  text-decoration-line: none;
+}
+
+.btn.call-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn.whatsapp-btn {
+  background-color: #25d366;
+  color: white;
+}
+
+.note {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.contact-card a {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
+
+/* ✅ Mobile Optimizations */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 3rem 1rem;
+  }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
+  .contact-grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .order-buttons {
+    flex-direction: row;
+    gap: 0.8rem;
+  }
+
+  .order-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+    font-size: 0.85rem;
+    padding: 0.8rem;
+    margin: auto;
+  }
+
+  .contact-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .note {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+}

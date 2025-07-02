@@ -1,0 +1,339 @@
+/* =============================
+   ✅ ROOT THEME VARIABLES
+============================= */
+:root {
+  --primary-color: #055a01;
+  --secondary-color: #36be3c;
+  --accent-color: #c8e6c9;
+  --bg-color: #f2f2f2;
+  --text-color: #333;
+  --light-color: #ffffff;
+  --dark-color: #1b5e20;
+  --font-main: 'Segoe UI', Tahoma, sans-serif;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+html {
+  scroll-behavior: smooth;
+}
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+
+/* =============================
+   ✅ GLOBAL RESET & BASE STYLES
+============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =============================
+   ✅ NAVBAR STYLES
+============================= */
+.navbar {
+  background: var(--light-color);
+  color: var(--primary-color);
+  padding: 0.3rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-radius: 0 0 20px 20px;
+  box-shadow:
+    4px 4px 8px rgba(0, 0, 0, 0.05),
+    -4px -4px 8px rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid #eee;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.nav-logo img {
+  height: 70px;
+  width: auto;
+}
+
+/* 🔽 Hamburger (mobile only) */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  z-index: 1100;
+}
+.hamburger img{
+    height: 60px;
+    width: auto;
+}
+
+/* 🔽 Desktop Nav */
+.nav-menu {
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--secondary-color);
+}
+
+/* =============================
+   ✅ SIDEBAR (Optional)
+============================= */
+.sidebar {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  background: var(--secondary-color);
+  color: var(--light-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  max-width: 250px;
+  z-index: 900;
+}
+
+.close-sidebar{
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    padding: 0.4rem;
+    border-radius: 20%;
+    background: linear-gradient(rgb(246, 79, 79));
+    border:0.01rem;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+}
+.sidebar-box p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* =============================
+   ✅ SECTION PLACEHOLDERS
+============================= */
+/* section {
+  padding: 4rem 0;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+} */
+
+/* =============================
+   ✅ BUTTON STYLES
+============================= */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background: var(--secondary-color);
+  color: var(--light-color);
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--primary-color);
+}
+
+/* =============================
+   ✅ FOOTER
+============================= */
+.footer {
+  background: var(--dark-color);
+  color: var(--light-color);
+  text-align: center;
+  padding: 1rem 1rem 2.2rem; /* extra space for marquee */
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer small {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: #ccc;
+}
+
+.footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Marquee Strip */
+.footer-marquee {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.5rem 0;
+  overflow: hidden;
+  margin-left: -20px;
+}
+
+.marquee-content {
+  display: flex;
+  width: fit-content;
+  white-space: nowrap;
+  animation: scroll-left 25s linear infinite;
+}
+
+.marquee-content span {
+  font-size: 0.8rem;
+  color: #eee;
+  padding-right: 2rem;
+  letter-spacing: 0.5px;
+}
+
+/* ✅ Marquee Animation */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* =============================
+   ✅ PRELOADER
+============================= */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 3s ease;
+}
+
+.preloader-logo {
+  width: 120px;
+  animation: spin 2s infinite ease-in-out;
+}
+
+@keyframes spin {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(2) rotate(5deg); }
+  100% { transform: scale(1) rotate(-5deg); }
+}
+
+/* =============================
+   ✅ RESPONSIVE NAVIGATION
+============================= */
+@media (max-width: 768px) {
+    body{
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        overflow-y: scroll;
+    }
+    body::-webkit-scrollbar{
+        display:none;
+    }
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
+    border-radius: 5%;
+    background: var(--light-color);
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem 1.5rem;
+    transition: right 0.3s ease-in-out;
+    z-index: 1001;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+    padding: 0.5rem 0;
+    width: 100%;
+  }
+
+  .navbar .container {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-sidebar{
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    padding: 0.3rem;
+    border-radius: 20%;
+    background:rgb(246, 79, 79);
+    border:0.01rem;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+  }}
+  

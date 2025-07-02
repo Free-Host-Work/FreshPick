@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ✅ Meta Tags for SEO -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FreshPick | Best Vegetables & Grocery Delivery Partner</title>
+  <meta name="description" content="FreshPick is your trusted partner for farm-fresh vegetables, groceries, and daily essentials — delivered to your home quickly, safely, and affordably." />
+  <meta name="keywords" content="FreshPick, vegetables, grocery delivery, home delivery vegetables, fresh produce, online veg shop, best veg delivery, grocery partner" />
+  <meta name="author" content="FreshPick Team" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ✅ Open Graph -->
+  <meta property="og:title" content="FreshPick - Fresh Vegetables & Home Grocery Delivery" />
+  <meta property="og:description" content="Buy fresh vegetables and groceries online from FreshPick. Wholesale rates. Fast home delivery. Quality guaranteed." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://free-host-work.github.io/FreshPick/" />
+  <meta property="og:image" content="https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png" />
+
+  <!-- ✅ Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FreshPick | Grocery & Vegetable Home Delivery" />
+  <meta name="twitter:description" content="FreshPick delivers fresh vegetables and groceries to your door with care and quality." />
+  <meta name="twitter:image" content="https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png" />
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="images/logos/freshpick-logo.png" type="image/png" />
+
+  <!-- ✅ Stylesheets -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/about.css" />
+  <link rel="stylesheet" href="css/products.css" />
+  <link rel="stylesheet" href="css/offers.css" />
+  <link rel="stylesheet" href="css/delivery.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+</head>
+
+<body id="body-page">
+    <div id="google_translate_element" >
+
+  <!-- ✅ LOADER -->
+  <div id="preloader">
+    <img src="images/logos/freshpick-logo.png" alt="FreshPick Logo" class="preloader-logo" />
+  </div>
+
+  <!-- ✅ NAVBAR -->
+  <header class="navbar">
+    <div class="container">
+      <!-- 🔰 Logo -->
+      <div class="nav-logo">
+        <img src="images/logos/Fresh Pick Vegetables Logo.png" alt="FreshPick" />
+      </div>
+
+      <!-- 🔰 Hamburger Button -->
+      <button class="hamburger" id="hamburger"><img src="images/logos/freshpick-logo.png" alt="logo"></button>
+
+      <!-- 🔰 Nav Menu -->
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-links">
+          <li><a href="#home">HomePage</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#offers">Offers</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ✅ SIDEBAR (Promotions) -->
+  <aside class="sidebar" id="offerSidebar">
+    <button class="close-sidebar" onclick="closeSidebar()">X </button>
+    <div class="sidebar-box">
+      
+      <p><strong>Order Now</strong> for same-day delivery 🚚</p>
+    </div>
+  </aside>
+
+  <!-- ✅ MAIN CONTENT PLACEHOLDERS -->
+  <main>
+    <section id="home">
+    </section>
+    <section id="about"></section>
+    <section id="products"></section>
+    <section id="offers"></section>
+    <section id="delivery"></section>
+    <section id="contact"></section>
+  </main>
+</div>
+  <!-- ✅ FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2025 <strong>FreshPick</strong>. Your trusted vegetable & grocery delivery partner.</p>
+    <small>Developed by <strong>MithunMP</strong> • <a href="mailto:mithunmp2004@gmail.com">mithunmp2004@gmail.com</a></small>
+  </div>
+
+  <!-- 🔁 Marquee Bottom Strip -->
+  <div class="footer-marquee">
+    <div class="marquee-content">
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+      <span>Developed by MithunMP • FreshPick • Your Kitchen Partner &nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    </div>
+  </div>
+</footer>
+
+
+  <!-- ✅ JS Loader & Nav Toggle -->
+  <script src="js/loadsection.js"></script>
+  <script>
+    // Loader fade-out
+    window.addEventListener("load", function () {
+      const loader = document.getElementById("preloader");
+      loader.style.opacity = "0";
+      setTimeout(() => loader.style.display = "none", 500);
+    });
+
+    // Navbar hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+    });
+    //specialoffer close
+    function closeSidebar(){
+        const sidebar=document.getElementById("offerSidebar");
+        sidebar.style.display="none"
+    }
+    // Optional: Close menu when link clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    });
+  </script>
+  <script type="text/javascript">
+  // Google Translate init
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'en,ml,hi,ta,kn',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      },
+      'google_translate_element'
+    );
+
+    // Auto-translate based on browser language
+    const userLang = navigator.language || navigator.userLanguage;
+    const langMap = {
+      hi: 'hi', ml: 'ml', ta: 'ta', kn: 'kn'
+    };
+
+    if (langMap[userLang.slice(0, 2)]) {
+      const langCode = langMap[userLang.slice(0, 2)];
+      setTimeout(() => {
+        const iframe = document.querySelector('iframe.goog-te-menu-frame');
+        if (iframe) {
+          const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+          const langLink = innerDoc.querySelector(`.goog-te-menu2-item span.text:contains(${langCode})`);
+          if (langLink) langLink.click();
+        }
+      }, 3000);
+    }
+  }
+
+  // Hide Google's floating language selector permanently
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-gadget-icon,
+    .goog-te-combo {
+      display: none !important;
+    }
+    body { top: 0px !important; }
+  `;
+  document.head.appendChild(style);
+
+  // Load Google Translate
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      const popup = document.getElementById("translate-popup");
+      popup.style.display = "none";
+    }, 4000); // total time shown
+  });
+</script>
+
+<!-- Google Translate script -->
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true,
+  });
+</script>
+
+</body>
+</html>
