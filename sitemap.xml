@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://free-host-work.github.io/FreshPick/</loc></url>
-  <url><loc>https://free-host-work.github.io/FreshPick/about.html</loc></url>
-  <url><loc>https://free-host-work.github.io/FreshPick/product.html</loc></url>
-  <url><loc>https://free-host-work.github.io/FreshPick/contact.html</loc></url>
+<urlset 
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/#about</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/#products</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/#offers</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/#delivery</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://free-host-work.github.io/FreshPick/#contact</loc>
+    <lastmod>2025-07-02</lastmod>
+    <priority>0.70</priority>
+  </url>
+
 </urlset>
