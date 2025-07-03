@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Tomato",
+    "image": "images/products/tomato.png"
+  },
+  {
+    "id": 2,
+    "name": "Onion",
+    "image": "images/products/onion.png"
+  },
+  {
+    "id": 3,
+    "name": "Potato",
+    "image": "images/products/potato.png"
+  },
+  {
+    "id": 4,
+    "name": "Carrot",
+    "image": "images/products/carrot.png"
+  },
+  {
+    "id": 5,
+    "name": "Cabbage",
+    "image": "images/products/cabbage.png"
+  }
+]

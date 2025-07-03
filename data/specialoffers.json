@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Combo Pack: Tomato + Onion",
+    "unit": "1 kg each",
+    "image": "images/offers/combo1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Healthy Pack: Carrot + Beetroot",
+    "unit": "500g each",
+    "image": "images/offers/combo2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Leafy Treat: Spinach + Coriander",
+    "unit": "2 bunches",
+    "image": "images/offers/combo3.jpg"
+  }
+]

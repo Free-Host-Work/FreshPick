@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>FreshPick Cart | Order Vegetables & Groceries</title>
+    <!-- Meta tags omitted for brevity -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
+    <link rel="stylesheet" href="css/cart.css" />
+  </head>
+  <body>
+    <!-- ✅ NAVBAR (Same as Index) -->
+    <header class="navbar">
+      <div class="container">
+        <!-- 🔰 Logo -->
+        <div class="nav-logo">
+          <a href="index.html" title="FreshPick Home">
+            <img
+              src="images/logos/Fresh Pick Vegetables Logo.png"
+              alt="FreshPick Logo"
+            />
+          </a>
+        </div>
+
+        <!-- 🔰 Hamburger Button for Mobile -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <img src="images/logos/freshpick-logo.png" alt="menu icon" />
+        </button>
+
+        <!-- 🔰 Navigation Links -->
+        <nav class="nav-menu" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href="index.html#home">HomePage</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#offers">Offers</a></li>
+            <li><a href="index.html#delivery">Delivery</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="cart.html" class="active">Cart</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <button class="view-cart-btn" onclick="openPopup()">See My Cart</button>
+      <!-- Products -->
+      <section class="products" data-aos="fade-up">
+        <h2>🛒 Select Products</h2>
+        <div id="product-list" class="product-list"></div>
+      </section>
+
+      <!-- Special Offers Section -->
+      <section class="special-offers" data-aos="fade-up">
+        <h2 onclick="toggleOffers()" class="offers-toggle">
+          🎁 Special Offers <span id="offer-arrow">▼</span>
+        </h2>
+        <div id="offer-list" class="offer-list hidden"></div>
+      </section>
+
+      <!-- Cart Sidebar -->
+      <aside class="cart-sidebar" data-aos="fade-left">
+        <h3>Cart Summary</h3>
+        <ul id="cart-items" class="cart-items">
+          <li>No items in cart</li>
+        </ul>
+        <div>Total Items: <span id="total-items">0</span></div>
+      </aside>
+
+      <!-- Delivery Location -->
+      <section class="location-form" data-aos="zoom-in-up">
+        <h2>📍 Delivery Location</h2>
+        <label
+          ><input type="radio" name="loc-method" value="current" /> Use Current
+          Location</label
+        >
+        <label
+          ><input type="radio" name="loc-method" value="manual" checked /> Enter
+          Address</label
+        >
+        <label
+          ><input type="radio" name="loc-method" value="map" /> Pin on
+          Map</label
+        >
+
+        <div class="location-inputs">
+          <div id="manual-address">
+            <textarea
+              id="address-text"
+              rows="2"
+              placeholder="Enter full address"
+            ></textarea>
+          </div>
+          <div id="map-tag" class="hidden">
+            <div id="map" style="height: 300px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Order Button -->
+      <section class="order-section" data-aos="fade-up">
+        <button class="order-button" onclick="placeOrder()">
+          Order via WhatsApp
+        </button>
+      </section>
+    </main>
+
+    <!-- Popup Cart -->
+    <div id="popup-cart" class="popup-cart hidden" onclick="closePopup()">
+      <div class="popup-content" onclick="event.stopPropagation()">
+        <h2>🧾 Your Carted Items</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>SI No</th>
+              <th>Product</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody id="popup-table-body"></tbody>
+        </table>
+        <button onclick="closePopup()" class="close-popup">Close</button>
+      </div>
+    </div>
+
+    <footer>&copy; 2025 FreshPick • All rights reserved.</footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    </script>
+
+    <script>
+      let cart = [],
+        productsList = [],
+        map,
+        marker;
+      let currentLocationCoords = null;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const productList = document.getElementById("product-list");
+        const cartItems = document.getElementById("cart-items");
+        const totalItems = document.getElementById("total-items");
+        const manualAddress = document.getElementById("manual-address");
+        const mapTag = document.getElementById("map-tag");
+
+        // Load products
+        fetch("data/products.json")
+          .then((r) => r.json())
+          .then((prods) => {
+            productsList = prods;
+            prods.forEach((p) => {
+              const d = document.createElement("div");
+              d.className = "product-card";
+              d.setAttribute("data-aos", "zoom-in-up");
+              d.innerHTML = `
+              <img src="${p.image}" alt="${p.name}" />
+              <h3>${p.name}</h3>
+              <small>Unit: ${p.unit}</small><br/>
+              <input type="number" id="qty-${p.id}" step="0.1" value="1.0" class="qty-input" />
+              <button onclick="addToCart(${p.id})">Add to Cart</button>`;
+              productList.appendChild(d);
+            });
+            AOS.refresh();
+          });
+
+        const offerList = document.getElementById("offer-list");
+
+        fetch("data/specialoffers.json")
+          .then((r) => r.json())
+          .then((offers) => {
+            offers.forEach((o) => {
+              const d = document.createElement("div");
+              d.className = "offer-card";
+              d.setAttribute("data-aos", "zoom-in");
+              d.innerHTML = `
+        <div class="offer-badge">Special</div>
+        <img src="${o.image}" alt="${o.name}" />
+        <h3>${o.name}</h3>
+        <small>Unit: ${o.unit}</small><br/>
+        <button onclick="addOfferToCart(${o.id})">Add to Cart</button>`;
+              offerList.appendChild(d);
+            });
+            AOS.refresh();
+          });
+
+        window.addOfferToCart = (id) => {
+          const offer = offerList.querySelectorAll(".offer-card")[id - 1]; // Assuming ID starts at 1
+          const name = offer.querySelector("h3").textContent;
+          const unit = offer
+            .querySelector("small")
+            .textContent.replace("Unit: ", "");
+          const exists = cart.find((x) => x.name === name && x.unit === unit);
+          if (exists) exists.quantity += 1;
+          else cart.push({ id: 1000 + id, name, unit, quantity: 1 });
+          updateCartUI();
+          animateCartUpdate();
+        };
+
+        window.toggleOffers = () => {
+          const el = document.getElementById("offer-list");
+          el.classList.toggle("hidden");
+          const arrow = document.getElementById("offer-arrow");
+          arrow.textContent = el.classList.contains("hidden") ? "▼" : "▲";
+        };
+
+        window.addToCart = (id) => {
+          const qty = parseFloat(document.getElementById(`qty-${id}`).value);
+          if (!qty || qty <= 0) return alert("Enter valid quantity");
+          const prod = productsList.find((x) => x.id === id);
+          const found = cart.find((x) => x.id === id);
+          if (found) found.quantity += qty;
+          else
+            cart.push({ id, name: prod.name, unit: prod.unit, quantity: qty });
+          updateCartUI();
+          animateCartUpdate();
+        };
+
+        function updateCartUI() {
+          cartItems.innerHTML = "";
+          if (!cart.length) cartItems.innerHTML = "<li>No items in cart</li>";
+          cart.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = `${item.name} (${
+              item.unit
+            }) × ${item.quantity.toFixed(1)}`;
+            cartItems.appendChild(li);
+          });
+          totalItems.textContent = cart.length;
+        }
+
+        function animateCartUpdate() {
+          const bar = document.querySelector(".cart-sidebar");
+          bar.classList.add("updated");
+          setTimeout(() => bar.classList.remove("updated"), 600);
+        }
+
+        document
+          .querySelectorAll("input[name='loc-method']")
+          .forEach((radio) => {
+            radio.addEventListener("change", (e) => {
+              const m = e.target.value;
+              manualAddress.classList.toggle("hidden", m !== "manual");
+              mapTag.classList.toggle("hidden", m !== "map");
+              if (m === "map") initMap();
+              if (m === "current") {
+                navigator.geolocation.getCurrentPosition(
+                  (pos) => {
+                    currentLocationCoords = {
+                      lat: pos.coords.latitude,
+                      lng: pos.coords.longitude,
+                    };
+                  },
+                  () => {
+                    alert("Location access denied.");
+                    currentLocationCoords = null;
+                  }
+                );
+              }
+            });
+          });
+
+        window.placeOrder = () => {
+          if (!cart.length) return alert("Cart is empty!");
+
+          let msg = "*FreshPick Order*\n\n";
+          cart.forEach(
+            (i, idx) =>
+              (msg += `*${idx + 1}. ${i.name}* 🍀  — _${i.quantity.toFixed(
+                1
+              )} ${i.unit}_\n`)
+          );
+
+          msg += "\n———————————————\n";
+
+          const m = document.querySelector(
+            "input[name='loc-method']:checked"
+          ).value;
+
+          if (m === "manual") {
+            const addr = document.getElementById("address-text").value.trim();
+            if (!addr) return alert("Enter address!");
+            msg += `📍 *Delivery Address:*\n${addr}\n`;
+          } else if (m === "map") {
+            const pos = marker.getLatLng();
+            msg += `📍 *Pinned Location:*\nhttps://www.google.com/maps?q=${pos.lat.toFixed(
+              5
+            )},${pos.lng.toFixed(5)}\n`;
+          } else {
+            if (currentLocationCoords) {
+              const { lat, lng } = currentLocationCoords;
+              msg += `📍 *My Current Location:*\nhttps://www.google.com/maps?q=${lat},${lng}\n`;
+            } else {
+              msg += `❌ *Location not available.* Please enable GPS.\n`;
+            }
+          }
+
+          msg += "\n🕒 *Order Time:* " + new Date().toLocaleString();
+
+          window.open(
+            `https://wa.me/919447381020?text=${encodeURIComponent(msg)}`,
+            "_blank"
+          );
+        };
+
+        AOS.init({ duration: 1000, once: true });
+      });
+
+      function openPopup() {
+        const pop = document.getElementById("popup-cart"),
+          tbody = document.getElementById("popup-table-body");
+        pop.classList.remove("hidden");
+        tbody.innerHTML = "";
+        cart.forEach((i, idx) => {
+          tbody.insertAdjacentHTML(
+            "beforeend",
+            `<tr><td>${idx + 1}</td><td>${i.name}</td><td>${i.quantity.toFixed(
+              1
+            )} ${i.unit}</td></tr>`
+          );
+        });
+      }
+
+      function closePopup() {
+        document.getElementById("popup-cart").classList.add("hidden");
+      }
+
+      function initMap() {
+        if (map) return;
+        map = L.map("map").setView([12.1635, 75.4656], 14);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "&copy; OSM contributors",
+        }).addTo(map);
+        marker = L.marker(map.getCenter(), { draggable: true }).addTo(map);
+
+        // Geolocation
+        map.locate({ setView: true, maxZoom: 16 });
+        map.on("locationfound", (e) => marker.setLatLng(e.latlng));
+
+        // Search bar
+        L.Control.geocoder({ defaultMarkGeocode: false })
+          .on("markgeocode", (e) => {
+            const c = e.geocode.center;
+            map.setView(c, 16);
+            marker.setLatLng(c);
+          })
+          .addTo(map);
+
+        // Double-click to set pin
+        map.on("dblclick", (e) => marker.setLatLng(e.latlng));
+      }
+    </script>
+  </body>
+</html>

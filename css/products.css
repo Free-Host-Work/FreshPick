@@ -1,133 +1,383 @@
 /* ================================
-   ✅ PRODUCT SECTION STYLES
+   🌿 Base Variables (Optional)
+================================ */
+:root {
+  --primary-color: #34c759;
+  --secondary-color: #ff9500;
+  --text-color: #222;
+  --bg-light: #fff7ec;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+  --hover-glow: 0 0 15px rgba(54, 190, 60, 0.4);
+}
+
+/* ================================
+   ✅ Section Base Layout
 ================================ */
 .product-section {
   padding: 4rem 2rem;
   background-image: url('../images/godown7.png');
-  /* background: linear-gradient(to right, rgba(235, 237, 235, 0.767) 0%, rgba(252, 247, 247, 0.607) 30%, rgba(0,0,0,0) 100%); */
-  backdrop-filter: blur(5px);
-  background-attachment: fixed !important;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+  z-index: 1;
 }
 
-.product-bg-overlay {
-  backdrop-filter: blur(15px);
+.product-section .container {
 
+  margin: 0 auto;
+  position: relative;
 }
 
-.product-section .section-title {
+.overlay {
+  backdrop-filter: blur(10px);
+  background: rgba(199, 185, 185, 0.576);
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+/* ================================
+   ✅ Section Titles
+================================ */
+.section-title {
   text-align: center;
-  font-size: 2.5rem;
-  color: rgb(154, 240, 25) !important;
-  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  color: #b6ff3b;
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.product-section .section-subtitle {
+.section-subtitle {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  color: rgba(255, 239, 208, 0.95);
   margin-bottom: 2.5rem;
-  color: rgba(255, 239, 208, 0.973);
 }
 
-/* ✅ CATEGORY CONTAINER GRID */
+/* ================================
+   ✅ Category Container Grid
+================================ */
 .product-categories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* 4 per row for large desktop */
   gap: 2rem;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
+/* ================================
+   ✅ Each Category Block
+================================ */
 .product-category {
   background: #ffffff;
   padding: 2rem;
-  border-radius: 12px;
-  margin-top: 20px;
+  border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-category:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .product-category h3 {
-  font-size: 1.6rem;
-  margin-bottom: 1.2rem;
-  color: var(--dark-color);
+  font-size: 1.7rem;
+  color: var(--text-color);
+  margin-bottom: 1.4rem;
   border-left: 5px solid var(--primary-color);
-  padding-left: 0.6rem;
+  padding-left: 0.7rem;
 }
 
-/* ✅ INSIDE EACH CATEGORY: 2 Cards per Row */
-.product-grid {
+/* ================================
+   ✅ Product Grid (2 Cards Per Row)
+================================ */
+.product-grid,
+.offer-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* Always 2 per row */
   gap: 1rem;
-  margin-top: 20px;
 }
 
-/* ✅ PRODUCT CARD */
-.product-card {
+/* ================================
+   ✅ Product & Offer Cards
+================================ */
+.product-card,
+.offer-card {
   background: #fff;
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 1rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow:
-    2px 2px 6px rgba(0, 0, 0, 0.05),
-    -2px -2px 6px rgba(255, 255, 255, 0.7);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: inset 2px 2px 8px #d4d4d4, inset -2px -2px 8px #ffffff;
+  position: relative;
+  overflow: hidden;
 }
 
-.product-card img {
-  height: 60px;
+.product-card:hover,
+.offer-card:hover {
+  transform: scale(1.03);
+  box-shadow: var(--hover-glow);
+}
+
+/* ================================
+   ✅ Unified Image Container
+================================ */
+.img-container {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+  padding: 6px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.img-container img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  margin-bottom: 0.5rem;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.product-card h4 {
-  font-size: 1rem;
-  color: var(--primary-color);
-}
-
-.product-card:hover {
-  transform: scale(1.5);
-  box-shadow: 0 0 15px rgba(54, 190, 60, 0.4);
-}
-
-.product-card:hover img {
-  transform: scale(1.5);
+.product-card:hover .img-container img,
+.offer-card:hover .img-container img {
+  transform: scale(1.1);
   filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
 
 /* ================================
-   ✅ RESPONSIVE BREAKPOINTS
+   ✅ Product / Offer Text
+================================ */
+.product-card h4,
+.offer-card h3 {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.offer-card small {
+  font-size: 0.9rem;
+  color: #777;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ================================
+   ✅ Quantity Input
+================================ */
+.qty-input {
+  width: 70px;
+  padding: 0.35rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* ================================
+   ✅ Add to Cart Buttons
+================================ */
+.product-card button,
+.offer-card button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  justify-self: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.product-card button:hover,
+.offer-card button:hover {
+  background: #28a745;
+  transform: scale(1.05);
+}
+
+/* ================================
+   ✅ Offer Badge
+================================ */
+.offer-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff2d55;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ================================
+   ✅ Special Offers Section
+================================ */
+.special-offers-section {
+  padding: 2rem;
+  background: var(--bg-light);
+  border-top: 4px solid var(--secondary-color);
+  margin-top: 3rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.special-offers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.special-offers-header h2 {
+  font-size: 1.6rem;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.special-offers-header span {
+  font-size: 1.6rem;
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+/* ================================
+   ✅ Quick Order Button
+================================ */
+.product-section a.btn {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  padding: 2rem 4rem;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+
+  /* 🔽 Centering Styles */
+  margin: 1.5rem auto 0;
+  /* Top margin, auto horizontal margin */
+  display: block;
+  /* Ensures margin auto works for block-level */
+  width: fit-content;
+  /* Makes button width adapt to content */
+}
+
+
+a.btn:hover {
+  background: #28a745;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   ✅ Responsive Media Queries
 ================================ */
 
-/* Tablets and Laptops: 2 category blocks per row */
-@media (max-width: 1439px) {
+/* Medium Devices */
+@media (max-width: 1024px) {
   .product-categories {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .product-category h3 {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.4rem;
+  }
 }
 
-/* Mobile Devices: 1 category per row */
-@media (max-width: 767px) {
+/* Tablets and Small Screens */
+@media (max-width: 768px) {
   .product-categories {
     grid-template-columns: 1fr;
   }
 
+  .product-section {
+    padding: 2rem 1rem;
+  }
+
+  .product-section .container {
+    width: 100%;
+  }
+
+  .product-grid,
+  .offer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .img-container {
+    height: 90px;
+  }
+
+  .product-card h4,
+  .offer-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .qty-input {
+    width: 60px;
+    font-size: 0.9rem;
+  }
+
+  .product-section a.btn {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+
+  .product-grid,
+  .offer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .img-container {
+    height: 80px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .product-card,
+  .offer-card {
+    padding: 0.8rem;
+  }
+}
+
+/* Default: 4 products per row (desktop) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Tablets and Medium Screens: 2 per row */
+@media (max-width: 1024px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* Still 2 cards per row */
   }
+}
 
-  .product-card img {
-    height: 50px;
-  }
-
-  .product-card h4 {
-    font-size: 0.9rem;
+/* Mobile Devices: 2 per row */
+@media (max-width: 767px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
