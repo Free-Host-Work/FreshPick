@@ -21,6 +21,7 @@
       href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
     />
     <link rel="stylesheet" href="css/cart.css" />
+    <link rel="stylesheet" href="css/hamburger.css" />
   </head>
   <body>
     <!-- ✅ NAVBAR (Same as Index) -->
@@ -35,12 +36,10 @@
             />
           </a>
         </div>
-
         <!-- 🔰 Hamburger Button for Mobile -->
         <button class="hamburger" id="hamburger" aria-label="Toggle menu">
           <img src="images/logos/freshpick-logo.png" alt="menu icon" />
         </button>
-
         <!-- 🔰 Navigation Links -->
         <nav class="nav-menu" id="nav-menu">
           <ul class="nav-links">
@@ -55,13 +54,19 @@
         </nav>
       </div>
     </header>
-
     <main>
       <button class="view-cart-btn" onclick="openPopup()">See My Cart</button>
       <!-- Products -->
       <section class="products" data-aos="fade-up">
         <h2>🛒 Select Products</h2>
+        <input
+          type="text"
+          id="product-search"
+          placeholder="🔍 Search products..."
+          style="width: 100%; padding: 10px; margin-bottom: 15px"
+        />
         <div id="product-list" class="product-list"></div>
+        <button id="see-more-btn" class="see-more-btn">See All Products</button>
       </section>
 
       <!-- Special Offers Section -->
@@ -71,7 +76,6 @@
         </h2>
         <div id="offer-list" class="offer-list hidden"></div>
       </section>
-
       <!-- Cart Sidebar -->
       <aside class="cart-sidebar" data-aos="fade-left">
         <h3>Cart Summary</h3>
@@ -80,7 +84,6 @@
         </ul>
         <div>Total Items: <span id="total-items">0</span></div>
       </aside>
-
       <!-- Delivery Location -->
       <section class="location-form" data-aos="zoom-in-up">
         <h2>📍 Delivery Location</h2>
@@ -96,7 +99,6 @@
           ><input type="radio" name="loc-method" value="map" /> Pin on
           Map</label
         >
-
         <div class="location-inputs">
           <div id="manual-address">
             <textarea
@@ -110,7 +112,6 @@
           </div>
         </div>
       </section>
-
       <!-- Order Button -->
       <section class="order-section" data-aos="fade-up">
         <button class="order-button" onclick="placeOrder()">
@@ -118,7 +119,6 @@
         </button>
       </section>
     </main>
-
     <!-- Popup Cart -->
     <div id="popup-cart" class="popup-cart hidden" onclick="closePopup()">
       <div class="popup-content" onclick="event.stopPropagation()">
@@ -136,24 +136,63 @@
         <button onclick="closePopup()" class="close-popup">Close</button>
       </div>
     </div>
-
     <footer>&copy; 2025 FreshPick • All rights reserved.</footer>
-
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
-
     <script>
       const hamburger = document.getElementById("hamburger");
       const navMenu = document.getElementById("nav-menu");
-
+      // Toggle menu on button click
       hamburger.addEventListener("click", () => {
         navMenu.classList.toggle("active");
+        document.body.style.overflow = navMenu.classList.contains("active")
+          ? "hidden"
+          : "auto";
       });
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          navMenu.classList.contains("active") &&
+          !navMenu.contains(e.target) &&
+          !hamburger.contains(e.target)
+        ) {
+          navMenu.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      });
+      // Swipe detection
+      let touchStartX = 0;
+      let touchEndX = 0;
+      document.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+      document.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+      function handleSwipe() {
+        const threshold = 50;
+        if (touchStartX - touchEndX > threshold) {
+          // ✅ Swipe Right to Left → Open menu
+          navMenu.classList.add("active");
+          document.body.style.overflow = "hidden";
+        } else if (touchEndX - touchStartX > threshold) {
+          // ✅ Swipe Left to Right → Close menu
+          navMenu.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      }
     </script>
-
     <script>
+      function changeQty(id, delta, prefix = "") {
+        const input = document.getElementById(`${prefix}qty-${id}`);
+        let val = parseFloat(input.value) || 1.0;
+        val = Math.max(1, val + delta);
+        input.value = val.toFixed(1);
+      }
+
       let cart = [],
         productsList = [],
         map,
@@ -166,56 +205,112 @@
         const totalItems = document.getElementById("total-items");
         const manualAddress = document.getElementById("manual-address");
         const mapTag = document.getElementById("map-tag");
+        let allProducts = [],
+          showingAll = false;
 
-        // Load products
         fetch("data/products.json")
           .then((r) => r.json())
           .then((prods) => {
+            allProducts = prods;
             productsList = prods;
-            prods.forEach((p) => {
-              const d = document.createElement("div");
-              d.className = "product-card";
-              d.setAttribute("data-aos", "zoom-in-up");
-              d.innerHTML = `
-              <img src="${p.image}" alt="${p.name}" />
-              <h3>${p.name}</h3>
-              <small>Unit: ${p.unit}</small><br/>
-              <input type="number" id="qty-${p.id}" step="0.1" value="1.0" class="qty-input" />
-              <button onclick="addToCart(${p.id})">Add to Cart</button>`;
-              productList.appendChild(d);
-            });
+            renderProducts(prods.slice(0, 4));
             AOS.refresh();
           });
 
-        const offerList = document.getElementById("offer-list");
+        document
+          .getElementById("see-more-btn")
+          .addEventListener("click", () => {
+            showingAll = !showingAll;
+            document.getElementById("see-more-btn").textContent = showingAll
+              ? "Show Less"
+              : "See All Products";
+            renderProducts(showingAll ? allProducts : allProducts.slice(0, 4));
+          });
 
+        function renderProducts(list) {
+          productList.innerHTML = "";
+          list.forEach((p) => {
+            const d = document.createElement("div");
+            d.className = "product-card";
+            d.setAttribute("data-aos", "zoom-in-up");
+            d.innerHTML = `
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='images/packetveg1.png'; this.alt='Image not available';" />
+          <h3>${p.name}</h3>
+          <small>Unit: ${p.unit}</small><br/>
+          <div class="product-actions">
+            <div class="qty-control">
+              <button onclick="changeQty(${p.id}, -0.5, '')">−</button>
+              <input type="number" id="qty-${p.id}" step="0.1" value="1.0" class="qty-input" />
+              <button onclick="changeQty(${p.id}, 0.5, '')">+</button>
+            </div>
+            <button class="add-to-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+          </div>`;
+            productList.appendChild(d);
+          });
+          AOS.refresh();
+        }
+
+        document
+          .getElementById("product-search")
+          .addEventListener("input", (e) => {
+            const searchVal = e.target.value.toLowerCase();
+            const filtered = allProducts
+              .map((p) => ({
+                ...p,
+                relevance:
+                  (p.name.toLowerCase().indexOf(searchVal) === 0 ? 1 : 0) +
+                  (p.name.toLowerCase().includes(searchVal) ? 1 : 0),
+              }))
+              .filter((p) => p.relevance > 0)
+              .sort((a, b) => b.relevance - a.relevance);
+            renderProducts(filtered);
+          });
+
+        const offerList = document.getElementById("offer-list");
         fetch("data/specialoffers.json")
           .then((r) => r.json())
           .then((offers) => {
+            offerList.innerHTML = "";
             offers.forEach((o) => {
               const d = document.createElement("div");
               d.className = "offer-card";
               d.setAttribute("data-aos", "zoom-in");
               d.innerHTML = `
-        <div class="offer-badge">Special</div>
-        <img src="${o.image}" alt="${o.name}" />
-        <h3>${o.name}</h3>
-        <small>Unit: ${o.unit}</small><br/>
-        <button onclick="addOfferToCart(${o.id})">Add to Cart</button>`;
+                <div class="offer-badge">Special</div>
+                <img src="${o.image}" alt="${o.name}" onerror="this.src='images/packetveg1.png'; this.alt='Image not available';" />
+                <h3>${o.name}</h3>
+                <small>Unit: ${o.unit}</small><br/>
+                <div class="product-actions">
+                  <div class="qty-control">
+                    <button onclick="changeQty(${o.id}, -1, 'offer-')">−</button>
+                    <input type="number" id="offer-qty-${o.id}" step="1" value="1.0" class="qty-input" />
+                    <button onclick="changeQty(${o.id}, 1, 'offer-')">+</button>
+                  </div>
+                  <button class="add-to-cart-btn" onclick="addOfferToCart(${o.id})">Add to Cart</button>
+                </div>
+              `;
               offerList.appendChild(d);
             });
+            window.specialOffersCache = offers; // make offers accessible later
             AOS.refresh();
           });
 
+        // Add to cart for special offers (with quantity)
         window.addOfferToCart = (id) => {
-          const offer = offerList.querySelectorAll(".offer-card")[id - 1]; // Assuming ID starts at 1
-          const name = offer.querySelector("h3").textContent;
-          const unit = offer
-            .querySelector("small")
-            .textContent.replace("Unit: ", "");
-          const exists = cart.find((x) => x.name === name && x.unit === unit);
-          if (exists) exists.quantity += 1;
-          else cart.push({ id: 1000 + id, name, unit, quantity: 1 });
+          const offers = window.specialOffersCache || [];
+          const offer = offers.find((o) => o.id === id);
+          if (!offer) return;
+
+          const qtyInput = document.getElementById(`offer-qty-${id}`);
+          const qty = parseFloat(qtyInput?.value) || 1.0;
+          if (!qty || qty <= 0) return alert("Enter valid quantity");
+
+          const name = offer.name;
+          const unit = offer.unit;
+          // Try to find by id > 1000 (offer id)
+          const exists = cart.find((x) => x.id === 1000 + id);
+          if (exists) exists.quantity += qty;
+          else cart.push({ id: 1000 + id, name, unit, quantity: qty });
           updateCartUI();
           animateCartUpdate();
         };
@@ -285,21 +380,16 @@
 
         window.placeOrder = () => {
           if (!cart.length) return alert("Cart is empty!");
-
           let msg = "*FreshPick Order*\n\n";
-          cart.forEach(
-            (i, idx) =>
-              (msg += `*${idx + 1}. ${i.name}* 🍀  — _${i.quantity.toFixed(
-                1
-              )} ${i.unit}_\n`)
-          );
-
+          cart.forEach((i, idx) => {
+            msg += `*${idx + 1}. ${i.name}*   —  ${i.quantity.toFixed(1)} X ${
+              i.unit
+            }\n`;
+          });
           msg += "\n———————————————\n";
-
           const m = document.querySelector(
             "input[name='loc-method']:checked"
           ).value;
-
           if (m === "manual") {
             const addr = document.getElementById("address-text").value.trim();
             if (!addr) return alert("Enter address!");
@@ -317,9 +407,7 @@
               msg += `❌ *Location not available.* Please enable GPS.\n`;
             }
           }
-
           msg += "\n🕒 *Order Time:* " + new Date().toLocaleString();
-
           window.open(
             `https://wa.me/919447381020?text=${encodeURIComponent(msg)}`,
             "_blank"
@@ -339,7 +427,7 @@
             "beforeend",
             `<tr><td>${idx + 1}</td><td>${i.name}</td><td>${i.quantity.toFixed(
               1
-            )} ${i.unit}</td></tr>`
+            )} X ${i.unit}</td></tr>`
           );
         });
       }
@@ -355,12 +443,8 @@
           attribution: "&copy; OSM contributors",
         }).addTo(map);
         marker = L.marker(map.getCenter(), { draggable: true }).addTo(map);
-
-        // Geolocation
         map.locate({ setView: true, maxZoom: 16 });
         map.on("locationfound", (e) => marker.setLatLng(e.latlng));
-
-        // Search bar
         L.Control.geocoder({ defaultMarkGeocode: false })
           .on("markgeocode", (e) => {
             const c = e.geocode.center;
@@ -368,8 +452,6 @@
             marker.setLatLng(c);
           })
           .addTo(map);
-
-        // Double-click to set pin
         map.on("dblclick", (e) => marker.setLatLng(e.latlng));
       }
     </script>

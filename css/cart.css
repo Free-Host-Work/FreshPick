@@ -1,5 +1,4 @@
-/* ====== Root & Reset ====== */
-*,
+/* ===== Root & Reset ===== */
 :root {
     --primary-color: #34c759;
     --secondary-color: #ff9500;
@@ -7,11 +6,12 @@
     --dark-color: #222222;
 }
 
+*,
 *::before,
 *::after {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -19,22 +19,24 @@ body {
     background: #f7fafc;
     color: #333;
     line-height: 1.5;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    /* ✅ Prevent horizontal scroll */
 }
 
+/* ===== General Elements ===== */
 img {
     max-width: 100%;
     display: block;
     object-fit: cover;
 }
 
-/* ====== Header ====== */
+/* ===== Header ===== */
 .cart-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    background: #34c759;
+    background: var(--primary-color);
     color: white;
     position: sticky;
     top: 0;
@@ -45,9 +47,10 @@ img {
     height: 40px;
 }
 
+/* ===== View Cart Button ===== */
 .view-cart-btn {
     background: #fff;
-    color: #34c759;
+    color: var(--primary-color);
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -63,7 +66,7 @@ img {
     outline: none;
 }
 
-/* ====== Main Layout ====== */
+/* ===== Main Layout ===== */
 main {
     display: flex;
     flex-wrap: wrap;
@@ -71,11 +74,166 @@ main {
     padding: 2rem;
 }
 
+/* Prevent overflow */
+main,
+.products,
+.cart-sidebar {
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+/* ===== Products List ===== */
 .products {
     flex: 2;
     min-width: 300px;
 }
 
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
+
+}
+
+/* ===== Product Card Unified Layout ===== */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Product Card */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 340px; /* adjust as needed for your design */
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Product image */
+.product-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+}
+
+/* Product title */
+.product-card h3 {
+    margin: 0.5rem 0 0.3rem;
+    font-size: 1.1rem;
+}
+
+/* Product unit */
+.product-card small {
+    color: #555;
+}
+
+/* Actions: quantity control + add to cart button */
+.product-actions {
+    margin-top: auto; /* Push actions to the bottom */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Quantity control layout */
+.qty-control {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0 0.2rem 0;
+    width: 100%;
+}
+
+/* Quantity input */
+.qty-input {
+    width: 70px;
+    padding: 0.35rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Plus/minus buttons */
+.qty-control button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    line-height: 1;
+}
+
+.qty-control button:hover,
+.qty-control button:focus {
+    background: #28a745;
+}
+
+/* Add to cart button */
+.product-actions .add-to-cart-btn,
+.product-card button.add-to-cart-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    margin: 0;
+}
+
+.product-actions .add-to-cart-btn:hover,
+.product-actions .add-to-cart-btn:focus,
+.product-card button.add-to-cart-btn:hover,
+.product-card button.add-to-cart-btn:focus {
+    background: #28a745;
+    transform: scale(1.05);
+    outline: none;
+}
+
+/* Card hover effect */
+.product-card:hover,
+.product-card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+/* Card added animation */
+.product-card.added {
+    outline: 2px solid var(--primary-color);
+    animation: flash 0.6s ease;
+}
+
+@keyframes flash {
+    0% { background: #e6ffe6; }
+    100% { background: #fff; }
+}
+@keyframes flash {
+    0% {
+        background: #e6ffe6;
+    }
+
+    100% {
+        background: #fff;
+    }
+}
+
+/* ===== Cart Sidebar ===== */
 .cart-sidebar {
     flex: 1;
     min-width: 260px;
@@ -88,90 +246,9 @@ main {
     height: fit-content;
 }
 
-/* ====== Product Cards ====== */
-.product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 1.5rem;
-}
-
-.product-card {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.product-card:hover,
-.product-card:focus-within {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-}
-
-.product-card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.6rem;
-}
-
-.product-card h3 {
-    margin: 0.5rem 0 0.3rem;
-    font-size: 1.1rem;
-}
-
-.product-card small {
-    color: #555;
-}
-
-.qty-input {
-    width: 70px;
-    padding: 0.35rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    text-align: center;
-}
-
-.product-card button {
-    background: #34c759;
-    color: white;
-    border: none;
-    padding: 0.5rem 0.8rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.product-card button:hover,
-.product-card button:focus {
-    background: #28a745;
-    transform: scale(1.05);
-    outline: none;
-}
-
-.product-card.added {
-    outline: 2px solid #34c759;
-    animation: flash 0.6s ease;
-}
-
-@keyframes flash {
-    0% {
-        background: #e6ffe6;
-    }
-
-    100% {
-        background: #fff;
-    }
-}
-
-/* ====== Cart Sidebar ====== */
 .cart-sidebar h3 {
     margin-bottom: 1rem;
-    border-bottom: 2px solid #34c759;
+    border-bottom: 2px solid var(--primary-color);
     padding-bottom: 0.5rem;
 }
 
@@ -187,12 +264,7 @@ main {
     font-size: 0.95rem;
 }
 
-.cart-sidebar div span {
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-/* ====== Location Form ====== */
+/* ===== Location Form ===== */
 .location-form {
     width: 100%;
     padding: 1rem;
@@ -227,7 +299,7 @@ main {
     border-radius: 6px;
 }
 
-/* ====== Order Button ====== */
+/* ===== Order Section ===== */
 .order-section {
     width: 100%;
     text-align: center;
@@ -235,7 +307,7 @@ main {
 }
 
 .order-button {
-    background: #ff9500;
+    background: var(--secondary-color);
     color: white;
     padding: 0.9rem 2.5rem;
     font-size: 1rem;
@@ -253,15 +325,7 @@ main {
     outline: none;
 }
 
-/* ====== Footer ====== */
-footer {
-    text-align: center;
-    padding: 1rem;
-    color: #666;
-    font-size: 0.85rem;
-}
-
-/* ====== Popup Cart ====== */
+/* ===== Popup Cart ===== */
 .popup-cart {
     position: fixed;
     inset: 0;
@@ -322,7 +386,7 @@ footer {
 .close-popup {
     display: block;
     margin: 0 auto;
-    background: #34c759;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
@@ -335,12 +399,170 @@ footer {
     background: #28a745;
 }
 
-/* ====== Utility ====== */
+/* ===== Utility ===== */
 .hidden {
     display: none !important;
 }
 
-/* ====== Responsive Enhancements ====== */
+/* ===== Special Offers Section ===== */
+.special-offers {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #fffaf4;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(255, 149, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.special-offers h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--secondary-color);
+    color: #fff;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.special-offers h2:hover {
+    background: #e08900!important;
+}
+
+/* --- Offer List Grid --- */
+.offer-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+/* --- Offer Card --- */
+.offer-card {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(255, 149, 0, 0.15);
+    text-align: center;
+    border: 2px dashed var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 270px;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(255, 149, 0, 0.3);
+}
+
+/* --- Card Content for Uniform Height --- */
+.offer-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    display: block;
+    flex-shrink: 0;
+}
+
+.offer-card h3 {
+    font-size: 1.05rem;
+    color: #333;
+    margin: 0.4rem 0 0.3rem;
+    min-height: 2.2em;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.offer-card small {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.offer-card button {
+    background:  #e08700!important;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 0.7rem;
+    align-self: center;
+}
+
+.offer-card button:hover {
+    background: #e01300!important;
+    transform: scale(1.05);
+}
+
+.offer-badge {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background: #ff3b30;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0 0.6rem 0.6rem 0;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Mobile: Exactly 2 cards per row --- */
+@media (max-width: 480px) {
+    .offer-list {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .offer-card {
+        min-height: 200px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .offer-card img {
+        height: 100px;
+    }
+}
+
+/* --- Tablet: 3-4 columns --- */
+@media (min-width: 481px) and (max-width: 900px) {
+    .offer-list {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+}
+
+/* --- Desktop: 4-5+ columns --- */
+@media (min-width: 901px) {
+    .offer-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* ===== Responsive Enhancements ===== */
 @media (max-width: 576px) {
     .view-cart-btn {
         font-size: 0.9rem;
@@ -360,11 +582,11 @@ footer {
 
     .product-list {
         grid-template-columns: repeat(2, 1fr);
-        /* ✅ Force 2 in a row on mobile */
         gap: 1rem;
     }
 
-    .product-card img {
+    .product-card img,
+    .offer-card img {
         height: 100px;
     }
 
@@ -372,272 +594,119 @@ footer {
         position: static;
         width: 100%;
     }
-}
 
-/* ====== Special Offers Section ====== */
-.special-offers {
-    width: 100%;
-    margin: 1rem 0;
-    padding: 1rem 1rem;
-    background: #fffaf4;
-    border-radius: 10px;
-    box-shadow: 0 0 12px rgba(255, 149, 0, 0.1);
-}
-
-.special-offers h2 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ff9500;
-    color: #fff;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    font-size: 1.4rem;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.3s ease;
-}
-
-.special-offers h2:hover {
-    background: #e08900;
-}
-
-.offer-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 1.2rem;
-    margin-top: 1rem;
-    transition: max-height 0.5s ease-in-out;
-}
-
-/* 🧱 Force 2-column layout on mobile */
-@media (max-width: 576px) {
-    .offer-list {
-        grid-template-columns: repeat(2, 1fr);
-        /* force 2 in a row on small devices */
-    }
-}
-
-
-.offer-card {
-    position: relative;
-    background: #ffffff;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(255, 149, 0, 0.15);
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 2px dashed #ff9500;
-}
-
-.offer-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(255, 149, 0, 0.3);
-}
-
-.offer-card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.6rem;
-}
-
-.offer-card h3 {
-    margin: 0.5rem 0;
-    font-size: 1.1rem;
-    color: #333;
-}
-
-.offer-card small {
-    color: #666;
-    font-size: 0.85rem;
-}
-
-.offer-badge {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    background: #ff3b30;
-    color: white;
-    font-size: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0 0.6rem 0.6rem 0;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.offer-card button {
-    margin-top: 0.5rem;
-    background: #ff9500;
-    color: white;
-    border: none;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.9rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.offer-card button:hover {
-    background: #e08700;
-    transform: scale(1.05);
-}
-
-/* Responsive Tweak for Offer Section */
-@media (max-width: 576px) {
     .special-offers h2 {
         font-size: 1.1rem;
         padding: 0.6rem 0.8rem;
     }
-
-    .offer-card h3 {
-        font-size: 1rem;
-    }
-
-    .offer-card img {
-        height: 100px;
-    }
 }
 
-/* ================================
-   ✅ NAVBAR STYLES (FINAL FIXED)
-================================ */
-.navbar {
-    background: var(--light-color);
-    /* Use solid color */
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    border-radius: 0 0 20px 20px;
-    box-shadow:
-        0px 4px 12px rgba(0, 0, 0, 0.08),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid #eaeaea;
-    backdrop-filter: blur(10px);
-}
+/* ... [💡 All your existing CSS remains unchanged above this] ... */
 
-.navbar .container {
-    max-width: 1200px;
-    margin: 0 auto;
+/* ===== New: Quantity Control Buttons ===== */
+.qty-control {
     display: flex;
-    justify-content: space-between;
+    gap: 6px;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    padding: 0 1rem;
-    width: 100%;
+    margin: 0.5rem 0;
 }
 
-.nav-logo img {
-    height: 60px;
-    width: auto;
-}
-
-/* 🔽 Hamburger (Mobile Only) */
-.hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
+.qty-control input.qty-input {
+    width: 60px;
+    text-align: center;
     padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
 }
 
-.hamburger img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    max-width: 100%;
+.qty-control button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-/* 🔽 Nav Menu */
-.nav-menu {
+.qty-control button:hover {
+    background: #28a745;
+}
+
+/* ===== New: Product Search Input ===== */
+#product-search {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+#product-search:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.2);
+}
+
+/* ===== New: See More Button ===== */
+#see-more-btn {
+    margin: 1rem auto 0;
     display: block;
-    background: var(--light-color);
-}
-
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links a {
-    font-weight: 500;
+    background: #ffffff;
+    border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    padding: 0.4rem 0.2rem;
-}
-
-.nav-links a:hover {
-    color: var(--secondary-color);
-}
-
-.nav-links a.active {
-    color: var(--secondary-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
     font-weight: bold;
-    border-bottom: 2px solid var(--secondary-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* ================================
-   ✅ MOBILE STYLES (Hamburger)
-================================ */
-@media (max-width: 768px) {
-    .hamburger {
-        display: block;
+#see-more-btn:hover,
+#see-more-btn:focus {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.03);
+}
+
+/* ===== Responsive Enhancements (Extended) ===== */
+@media (max-width: 576px) {
+    .qty-control {
+        gap: 4px;
     }
 
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 250px;
-        border-radius: 8px 0 0 8px;
-        background: var(--light-color);
-        box-shadow: -2px 0 12px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 3rem 1.5rem;
-        transition: right 0.3s ease-in-out;
-        z-index: 1001;
+    .qty-control button {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.9rem;
     }
 
-    .nav-menu.active {
-        right: 0;
+    .qty-control input.qty-input {
+        width: 50px;
+        font-size: 0.9rem;
     }
 
-    .nav-links {
-        flex-direction: column;
-        gap: 1.2rem;
-        width: 100%;
+    #product-search {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.9rem;
     }
 
-    .nav-links li {
-        width: 100%;
+    #see-more-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
     }
+}
 
-    .nav-links a {
-        font-size: 1.1rem;
-        padding: 0.7rem 0;
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid #eee;
-    }
-
-    .nav-links a:hover {
-        background: #f2f2f2;
-        color: var(--secondary-color);
-    }
-
-    .nav-links a.active {
-        background: #eaffd3;
-        border-left: 4px solid var(--secondary-color);
-    }
+.products, .product-list {
+    overflow: visible !important;
+    /* ensures no scrollbars inside */
+    height: auto !important;
+    /* ensures grid grows naturally */
+    max-height: none !important;
+    /* disables any height limit */
 }

@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "home",
     "about",
     "products",
-    "offers",
     "delivery",
     "contact",
   ];

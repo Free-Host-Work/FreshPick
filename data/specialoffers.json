@@ -1,20 +1,68 @@
 [
   {
     "id": 1,
+    "name": "Sambar Kit",
+    "unit": "Serves 4 | 1.2 kg",
+    "image": "images/offers/sambar_kit.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Aviyal Kit",
+    "unit": "Serves 4 | 1.5 kg",
+    "image": "images/offers/aviyal_kit.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Thoran Combo (Cabbage + Carrot)",
+    "unit": "1 kg total",
+    "image": "images/offers/thoran_combo.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Kaalan Kit (Yam + Raw Banana + Green Chilli)",
+    "unit": "1.2 kg",
+    "image": "images/offers/kaalan_kit.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Mezhukkupuratti Pack (Chena + Payar)",
+    "unit": "1 kg",
+    "image": "images/offers/mezhukku_combo.jpg"
+  },
+  {
+    "id": 6,
     "name": "Combo Pack: Tomato + Onion",
     "unit": "1 kg each",
     "image": "images/offers/combo1.jpg"
   },
   {
-    "id": 2,
+    "id": 7,
     "name": "Healthy Pack: Carrot + Beetroot",
     "unit": "500g each",
     "image": "images/offers/combo2.jpg"
   },
   {
-    "id": 3,
+    "id": 8,
     "name": "Leafy Treat: Spinach + Coriander",
     "unit": "2 bunches",
     "image": "images/offers/combo3.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Salad Special: Cucumber + Bell Pepper",
+    "unit": "1 kg each",
+    "image": "images/offers/combo4.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Chutney Combo (Coconut + Curry Leaves + Ginger)",
+    "unit": "For 2 servings",
+    "image": "images/offers/chutney_combo.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Special Kit (Mixed Vegetables)",
+    "unit": "5 kg",
+    "image": "images/offers/special_kit.jpg"
   }
 ]

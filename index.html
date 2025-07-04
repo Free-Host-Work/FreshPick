@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <!-- Basic Tags -->
     <meta charset="UTF-8" />
@@ -102,82 +101,12 @@
     <link rel="stylesheet" href="css/home.css" />
     <link rel="stylesheet" href="css/about.css" />
     <link rel="stylesheet" href="css/products.css" />
-    <link rel="stylesheet" href="css/offers.css" />
+    <link rel="stylesheet" href="css/hamburger.css">
     <link rel="stylesheet" href="css/delivery.css" />
     <link rel="stylesheet" href="css/contact.css" />
-    
   </head>
-  
-<head>
-  <!-- Basic Tags -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshPick | Best Vegetables & Grocery Delivery Partner</title>
-
-  <!-- SEO Meta -->
-  <meta name="description" content="FreshPick Vangad delivers farm-fresh vegetables & groceries across Padiyottuchal, Cherkala, Bekal & Kasaragod. Wholesale prices. Same-day delivery." />
-  <meta name="keywords" content="FreshPick Vangad, vegetables, grocery delivery Kasaragod, online veg shop Kerala, Padiyottuchal groceries, Vangad fresh vegetables" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="MithunMP | FreshPick Team" />
-  <meta name="google-site-verification" content="g57Nje0xeUjfxcqBuwo5wslkQ86vavAcCLlCvpfbDiE" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="FreshPick Vangad - Grocery & Veg Delivery in Kasaragod" />
-  <meta property="og:description" content="Order fresh vegetables, fruits & groceries with same-day delivery in Vangad, Cherkala & Padiyottuchal. Wholesale rates, local produce, quality assured." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://free-host-work.github.io/FreshPick/" />
-  <meta property="og:image" content="https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="FreshPick | Grocery & Vegetable Delivery Vangad" />
-  <meta name="twitter:description" content="Farm-fresh veggies, fruits & groceries. Fast delivery in Vangad, Bekal, Padiyottuchal. FreshPick - Your Kitchen Partner." />
-  <meta name="twitter:image" content="https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png" />
-
-  <!-- Favicon (Google Search Icon on Left) -->
-  <link rel="icon" href="https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png" type="image/png" />
-  <!--sitemap-->
-  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://free-host-work.github.io/FreshPick/sitemap.xml" />
-  <!-- Organization Logo Schema (for Search) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "FreshPick",
-    "url": "https://free-host-work.github.io/FreshPick/",
-    "logo": "https://free-host-work.github.io/FreshPick/images/logos/freshpick-logo.png",
-    "sameAs": [
-      "https://free-host-work.github.io/FreshPick/"
-    ]
-  }
-  </script>
-
-  <!-- WebSite Schema with Search (optional) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "FreshPick Vangad",
-    "url": "https://free-host-work.github.io/FreshPick/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://free-host-work.github.io/FreshPick/#search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/home.css" />
-  <link rel="stylesheet" href="css/about.css" />
-  <link rel="stylesheet" href="css/products.css" />
-  <link rel="stylesheet" href="css/offers.css" />
-  <link rel="stylesheet" href="css/delivery.css" />
-  <link rel="stylesheet" href="css/contact.css" />
-    </head>
   <body id="body-page">
-    <div id="google_translate_element">
+    
       <!-- ✅ LOADER -->
       <div id="preloader">
         <img
@@ -198,10 +127,10 @@
             />
           </div>
 
-          <!-- 🔰 Hamburger Button -->
-          <button class="hamburger" id="hamburger">
-            <img src="images/logos/freshpick-logo.png" alt="logo" />
-          </button>
+          <!-- Hamburger Button -->
+<button class="hamburger" id="hamburger">
+  <img src="images/logos/freshpick-logo.png" alt="logo" />
+</button>
 
           <!-- 🔰 Nav Menu -->
           <nav class="nav-menu" id="nav-menu">
@@ -209,7 +138,6 @@
               <li><a href="#home">HomePage</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#products">Products</a></li>
-              <li><a href="#offers">Offers</a></li>
               <li><a href="#delivery">Delivery</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -230,7 +158,6 @@
         <section id="home"></section>
         <section id="about"></section>
         <section id="products"></section>
-        <section id="offers"></section>
         <section id="delivery"></section>
         <section id="contact"></section>
       </main>
@@ -278,29 +205,69 @@
             &nbsp;&nbsp;•&nbsp;&nbsp;</span
           >
         </div>
-      </div>
+      
     </footer>
 
     <!-- ✅ JS Loader & Nav Toggle -->
     <script src="js/loadsection.js"></script>
     <script>
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("nav-menu");
+
+  // Toggle menu on button click
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    document.body.style.overflow = navMenu.classList.contains("active") ? "hidden" : "auto";
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      navMenu.classList.contains("active") &&
+      !navMenu.contains(e.target) &&
+      !hamburger.contains(e.target)
+    ) {
+      navMenu.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  });
+
+  // Swipe detection
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const threshold = 50;
+
+    if (touchStartX - touchEndX > threshold) {
+      // ✅ Swipe Right to Left → Open menu
+      navMenu.classList.add("active");
+      document.body.style.overflow = "hidden";
+    } else if (touchEndX - touchStartX > threshold) {
+      // ✅ Swipe Left to Right → Close menu
+      navMenu.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+  }
+</script>
+
+    <script>
       // Loader fade-out
       window.addEventListener("load", function () {
         const loader = document.getElementById("preloader");
         loader.style.opacity = "0";
-        setTimeout(() => (loader.style.display = "none"), 500);
+        setTimeout(() => (loader.style.display = "none"), 1000);
       });
 
-      // Navbar hamburger toggle
-      const hamburger = document.getElementById("hamburger");
-      const navMenu = document.getElementById("nav-menu");
-
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        document.body.style.overflow = navMenu.classList.contains("active")
-          ? "hidden"
-          : "auto";
-      });
       //specialoffer close
       function closeSidebar() {
         const sidebar = document.getElementById("offerSidebar");
@@ -314,8 +281,9 @@
         });
       });
     </script>
+    <div id="google_translate_element"></div>
+
     <script type="text/javascript">
-      // Google Translate init
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
           {
@@ -325,33 +293,9 @@
           },
           "google_translate_element"
         );
-
-        // Auto-translate based on browser language
-        const userLang = navigator.language || navigator.userLanguage;
-        const langMap = {
-          hi: "hi",
-          ml: "ml",
-          ta: "ta",
-          kn: "kn",
-        };
-
-        if (langMap[userLang.slice(0, 2)]) {
-          const langCode = langMap[userLang.slice(0, 2)];
-          setTimeout(() => {
-            const iframe = document.querySelector("iframe.goog-te-menu-frame");
-            if (iframe) {
-              const innerDoc =
-                iframe.contentDocument || iframe.contentWindow.document;
-              const langLink = innerDoc.querySelector(
-                `.goog-te-menu2-item span.text:contains(${langCode})`
-              );
-              if (langLink) langLink.click();
-            }
-          }, 3000);
-        }
       }
 
-      // Hide Google's floating language selector permanently
+      // Hide the floating UI
       const style = document.createElement("style");
       style.innerHTML = `
     .goog-te-banner-frame.skiptranslate,
@@ -363,18 +307,31 @@
   `;
       document.head.appendChild(style);
 
-      // Load Google Translate
+      // Try auto-translate after iframe loads (not guaranteed to work)
       window.addEventListener("load", () => {
         setTimeout(() => {
+          const userLang = navigator.language.slice(0, 2);
+          const langMap = { hi: "hi", ml: "ml", ta: "ta", kn: "kn" };
+          const targetLang = langMap[userLang];
+
+          if (targetLang) {
+            const select = document.querySelector("select.goog-te-combo");
+            if (select) {
+              select.value = targetLang;
+              select.dispatchEvent(new Event("change"));
+            }
+          }
+
+          // Hide popup manually if shown
           const popup = document.getElementById("translate-popup");
-          popup.style.display = "none";
-        }, 4000); // total time shown
+          if (popup) popup.style.display = "none";
+        }, 4000);
       });
     </script>
 
-    <!-- Google Translate script -->
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+    <!-- Google Translate script -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({

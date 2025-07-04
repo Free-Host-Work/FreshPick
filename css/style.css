@@ -84,21 +84,6 @@ img {
   width: auto;
 }
 
-/* 🔽 Hamburger (mobile only) */
-.hamburger {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.hamburger img {
-  height: 60px;
-  width: auto;
-}
 
 /* 🔽 Desktop Nav */
 .nav-menu {
@@ -154,20 +139,6 @@ img {
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
 }
-
-/* =============================
-   ✅ SECTION PLACEHOLDERS
-============================= */
-/* section {
-  padding: 4rem 0;
-}
-
-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-} */
 
 /* =============================
    ✅ BUTTON STYLES
@@ -301,10 +272,6 @@ section h2 {
 
   body::-webkit-scrollbar {
     display: none;
-  }
-
-  .hamburger {
-    display: block;
   }
 
   .nav-menu {

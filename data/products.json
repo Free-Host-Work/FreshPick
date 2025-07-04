@@ -2,26 +2,151 @@
   {
     "id": 1,
     "name": "Tomato",
-    "image": "images/products/tomato.png"
+    "image": "images/products/tomato.png",
+    "unit": "kg"
   },
   {
     "id": 2,
     "name": "Onion",
-    "image": "images/products/onion.png"
+    "image": "images/products/onion.png",
+    "unit": "kg"
   },
   {
     "id": 3,
     "name": "Potato",
-    "image": "images/products/potato.png"
+    "image": "images/products/potato.png",
+    "unit": "kg"
   },
   {
     "id": 4,
     "name": "Carrot",
-    "image": "images/products/carrot.png"
+    "image": "images/products/carrot.png",
+    "unit": "kg"
   },
   {
     "id": 5,
+    "name": "Beetroot",
+    "image": "images/products/beetroot.png",
+    "unit": "kg"
+  },
+  {
+    "id": 6,
     "name": "Cabbage",
-    "image": "images/products/cabbage.png"
+    "image": "images/products/cabbage.png",
+    "unit": "piece"
+  },
+  {
+    "id": 7,
+    "name": "Cauliflower",
+    "image": "images/products/cauliflower.png",
+    "unit": "piece"
+  },
+  {
+    "id": 8,
+    "name": "Vendakka (Ladies Finger)",
+    "image": "images/products/vendakka.png",
+    "unit": "kg"
+  },
+  {
+    "id": 9,
+    "name": "Green Chilli",
+    "image": "images/products/greenchilli.png",
+    "unit": "kg"
+  },
+  {
+    "id": 10,
+    "name": "Ginger",
+    "image": "images/products/ginger.png",
+    "unit": "kg"
+  },
+  {
+    "id": 11,
+    "name": "Garlic",
+    "image": "images/products/garlic.png",
+    "unit": "kg"
+  },
+  {
+    "id": 12,
+    "name": "Kumbalanga (Ash Gourd)",
+    "image": "images/products/kumbalanga.png",
+    "unit": "piece"
+  },
+  {
+    "id": 13,
+    "name": "Mathan (Pumpkin)",
+    "image": "images/products/mathan.png",
+    "unit": "piece"
+  },
+  {
+    "id": 14,
+    "name": "Vellarikka (Cucumber)",
+    "image": "images/products/vellarikka.png",
+    "unit": "kg"
+  },
+  {
+    "id": 15,
+    "name": "Payar (Long Beans)",
+    "image": "images/products/payar.png",
+    "unit": "kg"
+  },
+  {
+    "id": 16,
+    "name": "Chena (Elephant Yam)",
+    "image": "images/products/chena.png",
+    "unit": "kg"
+  },
+  {
+    "id": 17,
+    "name": "Chembu (Taro Root)",
+    "image": "images/products/chembu.png",
+    "unit": "kg"
+  },
+  {
+    "id": 18,
+    "name": "Muringakka (Drumstick)",
+    "image": "images/products/muringakka.png",
+    "unit": "piece"
+  },
+  {
+    "id": 19,
+    "name": "Coriander Leaves",
+    "image": "images/products/coriander.png",
+    "unit": "bundle"
+  },
+  {
+    "id": 20,
+    "name": "Curry Leaves",
+    "image": "images/products/curryleaves.png",
+    "unit": "bundle"
+  },
+  {
+    "id": 21,
+    "name": "Spinach (Cheera)",
+    "image": "images/products/spinach.png",
+    "unit": "bundle"
+  },
+  {
+    "id": 22,
+    "name": "Banana (Ethapazham)",
+    "image": "images/products/banana.png",
+    "unit": "set"
+  },
+  {
+    "id": 23,
+    "name": "Raw Banana (Vazhakka)",
+    "image": "images/products/vazhakka.png",
+    "unit": "kg"
+  },
+  {
+    "id": 24,
+    "name": "Papaya",
+    "image": "images/products/papaya.png",
+    "unit": "piece"
+  },
+  {
+    "id": 25,
+    "name": "Snake Gourd (Padavalanga)",
+    "image": "images/products/padavalanga.png",
+    "unit": "kg"
   }
 ]

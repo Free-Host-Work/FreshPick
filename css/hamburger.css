@@ -1,0 +1,216 @@
+/* =============================
+   ✅ HAMBURGER NAVBAR CSS
+   Author: Master Mithun
+   ============================= */
+
+/* 🎨 Root Variables */
+:root {
+    --primary-color: #34c759;
+    --secondary-color: #ff9500;
+    --navbar-bg: #ffffff;
+    --navbar-text: #222;
+    --nav-shadow: rgba(0, 0, 0, 0.05);
+    --overlay-color: rgba(0, 0, 0, 0.5);
+}
+
+/* =============================
+   📌 TOP NAVBAR (Desktop & Mobile)
+============================= */
+.navbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 9999 !important;
+    background: var(--navbar-bg) !important;
+    color: var(--navbar-text) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.7rem 1.5rem !important;
+    box-shadow: 0 2px 10px var(--nav-shadow) !important;
+    border-bottom: 1px solid #eaeaea !important;
+}
+
+.navbar .nav-logo img {
+    height: 48px !important;
+    width: auto !important;
+}
+
+/* Container for full width layout */
+.navbar .container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* =============================
+   🍔 HAMBURGER BUTTON
+============================= */
+.hamburger {
+    display: none !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 1100 !important;
+    padding: 0.3rem !important;
+}
+
+.hamburger img {
+    height: 42px !important;
+    width: auto !important;
+    border-radius: 6px !important;
+}
+
+/* Show hamburger on small devices */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block !important;
+    }
+}
+
+/* =============================
+   📂 NAV MENU (Mobile Slide Drawer)
+============================= */
+.nav-menu {
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    height: 100vh !important;
+    width: 250px !important;
+    background: var(--navbar-bg) !important;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 3rem 1.5rem !important;
+    transition: right 0.3s ease-in-out !important;
+    z-index: 1001 !important;
+}
+
+.nav-menu.active {
+    right: 0 !important;
+}
+
+/* =============================
+   🔗 NAV LINKS INSIDE MENU
+============================= */
+.nav-links {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1.2rem !important;
+}
+
+.nav-links a {
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color) !important;
+}
+
+.nav-links a.active {
+    font-weight: bold !important;
+    color: var(--secondary-color) !important;
+    border-bottom: 2px solid var(--secondary-color) !important;
+}
+
+/* Mobile nav adjustments */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .nav-links a {
+        padding: 0.8rem 0 !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+        width: 100% !important;
+    }
+
+    .nav-links a.active {
+        background: #f9f9f9 !important;
+        border-left: 4px solid var(--secondary-color) !important;
+    }
+}
+
+/* =============================
+   🔳 OVERLAY BACKGROUND
+============================= */
+.nav-overlay {
+    content: "" !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: var(--overlay-color) !important;
+    z-index: 1000 !important;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease !important;
+}
+
+/* Show only when menu active */
+.nav-menu.active~.nav-overlay {
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+/* Prevent scroll when menu open */
+.menu-open {
+    overflow: hidden !important;
+}
+
+/* ================================
+   💻 DESKTOP NAVBAR FIX
+   ================================ */
+@media (min-width: 769px) {
+    .nav-menu {
+        position: static !important;
+        height: auto !important;
+        width: auto !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .nav-links {
+        flex-direction: row !important;
+        gap: 1.5rem !important;
+    }
+
+    .nav-links li {
+        width: auto !important;
+    }
+
+    .nav-links a {
+        padding: 0.5rem 0 !important;
+        border: none !important;
+        font-size: 1rem !important;
+        color: var(--primary-color) !important;
+    }
+
+    .nav-links a:hover {
+        color: var(--secondary-color) !important;
+    }
+
+    .hamburger {
+        display: none !important;
+    }
+
+    .nav-overlay {
+        display: none !important;
+    }
+}
