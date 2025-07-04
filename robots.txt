@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://free-host-work.github.io/FreshPick/sitemap.xml
